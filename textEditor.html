@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <title>Text Editor</title>
+    <script src="functions.js"></script>
+</head>
+<body>
+<input type="button" value="Word Count" onClick="countWords(document.forms.textBox)" />
+<input type="button" value="Save" onClick="saveWords()" />
+<input type="button" value="Undo" onClick="undo()" />
+<input type="button" value="Redo" onClick="redo()" /><br/>
+<form name="textBox">
+    <textarea rows="50" cols="100"></textarea>
+</form>
+<p>
+<script>countWords(document.forms.textBox)</script>
+</p>
+
+</body>
+</html>
