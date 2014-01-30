@@ -5,12 +5,17 @@ function countWords(text) {
     return text.length;
 }
 
-function saveWords(text) {
-
+function saveWords(arr, text) {
+    arr.unshift(text);
+    if(arr.length > 5 ){
+        arr.remove(5);
+    }
 }
 
-function undo(text) {
-
+function undo(arr, num) {
+    if(num > 0 ){
+        return arr[num + 1];
+    }
 }
 
 function redo(text) {
@@ -18,3 +23,4 @@ function redo(text) {
 }
 
 module.exports.countWords = countWords;
+module.exports.saveWords = saveWords;
