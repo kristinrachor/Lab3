@@ -1,20 +1,47 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <script src="functions.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script>
+        var saves = [];
+        var count = 0;
+        function letterCount() {
+            return "Word Count: " + document.getElementById("textBox").value.length;
+        }
+        $(document).ready(function(){
+          $("#wordCountButton").click(function() {
+              $("h3").text(letterCount());
+              //$("#wordCount".text($("#wordCount".text() + countWords("#textBox".text()))))
+            });
+            $("#saveButton").click(function() {
+                count = 0;
+                saveWords(saves, document.getElementById("textBox").value);
+                //alert("saved!");
+            });
+            $("#undoButton").click(function() {
+                document.getElementById("textBox").value = undo(saves, count);
+                count += 1;
+            });
+            $("#redoButton").click(function() {
+                count -= 1;
+                document.getElementById("textBox").value = redo(saves, count);
+            });
+        });
+    </script>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
     <title>Text Editor</title>
-    <script src="functions.js"></script>
 </head>
 <body>
-<input type="button" value="Word Count" onClick="countWords(document.forms.textBox)" />
-<input type="button" value="Save" onClick="saveWords()" />
-<input type="button" value="Undo" onClick="undo()" />
-<input type="button" value="Redo" onClick="redo()" /><br/>
-<form name="textBox">
-    <textarea rows="50" cols="100"></textarea>
+<input type="button" id="wordCountButton" value="Word Count" />
+<input type="button" id="saveButton" value="Save" onClick="saveWords()" />
+<input type="button" id="undoButton" value="Undo" onClick="undo()" />
+<input type="button" id="redoButton" value="Redo" onClick="redo()" />
+<h3 id="wordCount">Word Count: </h3><br/>
+<form>
+    <textarea id="textBox" rows="50" cols="100"></textarea>
 </form>
 <p>
-<script>countWords(document.forms.textBox)</script>
 </p>
 
 </body>

@@ -23,4 +23,13 @@ describe('Save words', function () {
             assert.deepEqual(array, myArray);
         })
     });
+    describe('test 2', function (){
+        it('should add the string to the array and take away an element', function (){
+            var array = ["hello", "my", "name", "is", "computer"];
+            var str = "hi";
+            var myArray = ["hi", "hello", "my", "name", "is"];
+            saveWords(array, str);
+            assert.deepEqual(array, myArray);
+        })
+    });
 });

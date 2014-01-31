@@ -8,19 +8,21 @@ function countWords(text) {
 function saveWords(arr, text) {
     arr.unshift(text);
     if(arr.length > 5 ){
-        arr.remove(5);
+        arr.splice(5,1);
     }
 }
 
 function undo(arr, num) {
-    if(num > 0 ){
-        return arr[num + 1];
+    if(arr[num] != undefined){
+        return arr[num];
     }
 }
 
-function redo(text) {
-
+function redo(arr, num) {
+    if(arr[num] != undefined){
+        return arr[num];
+    }
 }
 
 module.exports.countWords = countWords;
-module.exports.saveWords = saveWords; 
+module.exports.saveWords = saveWords;
