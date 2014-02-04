@@ -2,30 +2,60 @@
 <html>
 <head>
     <script src="functions.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="jquery.highlight.js"></script>
     <script>
-        var saves = [];
-        var count = 0;
+        var blah = fun();
         function letterCount() {
             return "Word Count: " + document.getElementById("textBox").value.length;
         }
         $(document).ready(function(){
           $("#wordCountButton").click(function() {
               $("h3").text(letterCount());
-              //$("#wordCount".text($("#wordCount".text() + countWords("#textBox".text()))))
             });
             $("#saveButton").click(function() {
-                count = 0;
-                saveWords(saves, document.getElementById("textBox").value);
+                blah.saveWords(document.getElementById("textBox").value);
                 //alert("saved!");
             });
             $("#undoButton").click(function() {
-                document.getElementById("textBox").value = undo(saves, count);
-                count += 1;
+                document.getElementById("textBox").value = blah.undo();
             });
             $("#redoButton").click(function() {
-                count -= 1;
-                document.getElementById("textBox").value = redo(saves, count);
+                document.getElementById("textBox").value = blah.redo();
+            });
+            $("#searchButton").click(function(){
+                document.getElementById("textBox").cols= "50";
+                var text = document.getElementById("textBox").value;
+                var term = document.getElementById("searchText").value;
+                document.getElementById("searched").innerHTML =  text;
+                $(document.getElementById("searched")).highlight(document.getElementById("searchText").value);
+
+                //document.getElementById("searched").highlight("h");//document.getElementById("searchText").value);
+                //document.getElementById("searched").style.backgroundColor = "yellow";
+            });
+            $("#doneButton").click(function() {
+                document.getElementById("textBox").cols = "100";
+                document.getElementById("searched").innerHTML = "";
+            });
+
+            $("#fontDown").click(function() {
+                document.getElementById("textBox").css("font-size","200px");
+            });
+
+            $("#fontUp").click(function() {
+                document.getElementById("textBox").cols = "100";
+                document.getElementById("searched").innerHTML = "";
+            });
+
+            $("#colorText").click(function() {
+                document.getElementById("textBox").cols = "100";
+                document.getElementById("searched").innerHTML = "";
+            });
+
+            $("#colorArea").click(function() {
+                document.getElementById("textBox").cols = "100";
+                document.getElementById("searched").innerHTML = "";
             });
         });
     </script>
@@ -34,15 +64,25 @@
 </head>
 <body>
 <input type="button" id="wordCountButton" value="Word Count" />
-<input type="button" id="saveButton" value="Save" onClick="saveWords()" />
-<input type="button" id="undoButton" value="Undo" onClick="undo()" />
-<input type="button" id="redoButton" value="Redo" onClick="redo()" />
+<input type="button" id="saveButton" value="Save"  />
+<input type="button" id="undoButton" value="Undo"  />
+<input type="button" id="redoButton" value="Redo"  />
+<label for="searchText">Search Term:</label>
+<input type="text" id="searchText" />
+<input type="button" id="searchButton" value ="Search" />
+<input type='button' id='doneButton' value='Hide Search'/><br />
+<h4> Fonts: </h4>
+<input type="button" id="fontUp" value ="Increase Size" />
+<input type="button" id="fontDown" value ="Decrease Size" />
+<input type="button" id="colorText" value ="Change text color" />
+<input type="button" id="colorArea" value ="Change background color" />
+
 <h3 id="wordCount">Word Count: </h3><br/>
 <form>
-    <textarea id="textBox" rows="50" cols="100"></textarea>
+    <textarea id="textBox" rows="50" cols="100" style="float: left"></textarea>
+    <p id="searched" style="float: left">
+    </p>
 </form>
-<p>
-</p>
 
 </body>
 </html>
