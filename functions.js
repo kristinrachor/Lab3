@@ -1,28 +1,41 @@
 /**
  * Created by racho008 on 1/28/14.
  */
-function countWords(text) {
-    return text.length;
-}
+function fun() {
+    var saves = [];
+    var count = 0;
+    return {
+        saves: saves,
 
-function saveWords(arr, text) {
-    arr.unshift(text);
-    if(arr.length > 5 ){
-        arr.splice(5,1);
+    saveWords: function saveWords(text) {
+    saves.unshift(text);
+    if(saves.length > 5 ){
+        saves.splice(5,1);
     }
+},
+
+    undo: function undo() {
+       // if (saves[count].isEmpty) {
+       //     return "";
+      //  }
+       // else {
+            if (count < 5)
+                count++;
+            return saves[count-1];
+       // }
+},
+
+    redo: function redo() {
+        if (saves[count].isEmpty) {
+            return "";
+        }
+        else {
+            if (count >= 0)
+                count--;
+            return saves[count];
+        }
+}
+}
 }
 
-function undo(arr, num) {
-    if(arr[num] != undefined){
-        return arr[num];
-    }
-}
-
-function redo(arr, num) {
-    if(arr[num] != undefined){
-        return arr[num];
-    }
-}
-
-module.exports.countWords = countWords;
-module.exports.saveWords = saveWords;
+module.exports.fun = fun;
